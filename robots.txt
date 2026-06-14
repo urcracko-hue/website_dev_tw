@@ -1,0 +1,13 @@
+# Global Spider Optimization Node - Website Dev TW
+User-agent: *
+Allow: /
+
+# Direct crawling optimizations
+Allow: /index.html
+
+# Prevent indexing of sensitive framework structures or asset scrapers if added later
+Disallow: /cgi-bin/
+Disallow: /private/
+
+# Explicitly index your global map index
+Sitemap: https://www.website-dev-tw.cooo.in/sitemap.xml
