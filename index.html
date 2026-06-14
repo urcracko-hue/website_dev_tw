@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Dev TW | Premium Web Development & Design Agency</title>
+    <!-- Tailwind CSS for modern structure grid -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for slick icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for elite tech typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#020617',
+                            card: '#0b1329',
+                            accent: '#6366f1',
+                            accentLight: '#818cf8',
+                            cyan: '#06b6d4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        
+        /* Modern Smooth Page Animations */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            filter: blur(8px);
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .page.active-page {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Nav Link Hover Micro-Animations */
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #06b6d4);
+            transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Staggered Item Entrance Animations */
+        .animate-fade-in {
+            animation: fadeInItem 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes fadeInItem {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Input Styling */
+        .premium-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .premium-input:focus {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.03);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-accent/10 rounded-full blur-3xl pointer-events-none animate-pulse" style="animation-duration: 8s;"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none animate-pulse" style="animation-duration: 12s;"></div>
+
+    <!-- Premium Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="font-heading text-2xl font-bold tracking-tight text-white flex items-center gap-2 cursor-pointer" onclick="switchPage('home')">
+                <span class="p-2 bg-gradient-to-tr from-brand-accent to-brand-cyan rounded-xl text-white text-base shadow-lg shadow-brand-accent/20">
+                    <i class="fa-solid fa-layer-group"></i>
+                </span>
+                WEBSITE DEV <span class="gradient-text font-extrabold">TW</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-gray-400">
+                <a onclick="switchPage('home')" id="nav-home" class="nav-link text-white active">Home</a>
+                <a onclick="switchPage('about')" id="nav-about" class="nav-link hover:text-white">Our Team</a>
+                <a onclick="switchPage('services')" id="nav-services" class="nav-link hover:text-white">Services</a>
+                <a onclick="switchPage('contact')" id="nav-contact" class="nav-link hover:text-white">Contact Us</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a onclick="switchPage('contact')" class="cursor-pointer inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white text-white hover:text-brand-dark font-semibold text-sm transition-all duration-300 border border-white/10 hover:border-transparent shadow-md">
+                    Get a Quote
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+
+        <!-- ================= HOME PAGE ================= -->
+        <section id="home" class="page active-page space-y-16 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-left animate-fade-in">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border-brand-accent/20 text-xs font-semibold text-brand-accentLight tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span> High-Performance Systems
+                    </div>
+                    <h1 class="font-heading text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
+                        We build websites that <br><span class="gradient-text">scale your business</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg max-w-xl font-light leading-relaxed">
+                        A robust duo of production-grade developers creating high-end, lightning-fast digital solutions to optimize conversions and showcase your brand flawlessly.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchPage('services')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-accent to-brand-cyan hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] text-white font-semibold shadow-lg shadow-brand-accent/20 transition-all">
+                            View Niches & Projects
+                        </button>
+                        <button onclick="switchPage('about')" class="px-6 py-3.5 rounded-xl glass-panel text-white hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] font-semibold transition-all border border-white/10">
+                            Meet The Architects
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual Pricing Card -->
+                <div class="lg:col-span-5 animate-fade-in" style="animation-delay: 0.15s;">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-accent to-brand-cyan opacity-20 blur-xl group-hover:opacity-30 transition-all"></div>
+                        <div class="relative glass-panel rounded-3xl p-8 space-y-6 border-white/10">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-xs font-bold tracking-widest text-brand-cyan uppercase">Unbeatable Launch Deal</h4>
+                                    <h3 class="text-2xl font-bold text-white mt-1 font-heading">Complete Custom Layout</h3>
+                                </div>
+                                <span class="bg-brand-accent/10 text-brand-accentLight border border-brand-accent/20 text-xs px-3 py-1 rounded-md font-semibold">Premium Variant</span>
+                            </div>
+                            
+                            <div class="border-y border-white/5 py-6">
+                                <span class="text-sm text-gray-400 font-light">Fixed Competitive Pricing</span>
+                                <div class="flex items-baseline gap-2 mt-1">
+                                    <span class="text-5xl font-extrabold font-heading text-white">₹4,000</span>
+                                    <span class="text-gray-400 font-medium">/ complete site</span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-3.5 text-sm text-gray-300">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-cyan"></i> 100% Fully Responsive Layout</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-cyan"></i> Custom Business Domain Integration</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-cyan"></i> High-Grade Structural SEO Setup</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-cyan"></i> Ultra Fast Page Load Speeds</li>
+                            </ul>
+
+                            <button onclick="switchPage('contact')" class="w-full py-4 text-center text-sm font-bold tracking-wide rounded-xl bg-white text-slate-950 hover:bg-gray-100 transition-all shadow-xl active:scale-[0.99]">
+                                Secure This Offer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= ABOUT US PAGE ================= -->
+        <section id="about" class="page space-y-12 py-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                    Engineered By Passionate Experts
+                </h2>
+                <p class="text-gray-400 font-light">
+                    We are a focused group of custom web developers leveraging over 3+ years of experience to transform complex codes into seamless user interfaces.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-6">
+                <!-- Dev 1 Card -->
+                <div class="glass-panel rounded-2xl p-8 border-white/5 hover:border-brand-accent/40 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center border border-brand-accent/20 group-hover:bg-brand-accent group-hover:text-white transition-all duration-300 text-brand-accentLight">
+                            <i class="fa-solid fa-code text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-heading">Ayyub Ansari</h3>
+                            <p class="text-xs font-semibold text-brand-accentLight tracking-wider uppercase mt-0.5">Co-Founder & Full-Stack Architect</p>
+                        </div>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">
+                            Specializing in production-grade architecture, database designs, logic implementation, and clean system infrastructure pipelines.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xs font-medium text-gray-400 uppercase tracking-widest">Industry Track</span>
+                        <span class="text-xs bg-white/5 text-white px-3 py-1 rounded-full border border-white/10 font-bold">3+ Years Exp</span>
+                    </div>
+                </div>
+
+                <!-- Dev 2 Card -->
+                <div class="glass-panel rounded-2xl p-8 border-white/5 hover:border-brand-cyan/40 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 flex items-center justify-center border border-brand-cyan/20 group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300 text-brand-cyan">
+                            <i class="fa-solid fa-cubes text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-heading">Umar Ansari</h3>
+                            <p class="text-xs font-semibold text-brand-cyan tracking-wider uppercase mt-0.5">Co-Founder & UI/UX Specialist</p>
+                        </div>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">
+                            Focused on dynamic user behavior modeling, premium pixel-perfect interaction aesthetics, design systems, and metadata optimization.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xs font-medium text-gray-400 uppercase tracking-widest">Industry Track</span>
+                        <span class="text-xs bg-white/5 text-white px-3 py-1 rounded-full border border-white/10 font-bold">3+ Years Exp</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SERVICES PAGE ================= -->
+        <section id="services" class="page space-y-12 py-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                    Tailored Niches We Design For
+                </h2>
+                <p class="text-gray-400 font-light">
+                    Every niche requires a unique aesthetic. We build perfectly tailored structural portfolios starting at just <span class="text-white font-bold">₹4,000</span> for all verticals.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+                <!-- Niche 1 -->
+                <div class="glass-panel p-6 rounded-xl border-white/5 hover:bg-white/[0.02] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-heading mt-4">Schools & Academies</h3>
+                    <p class="text-gray-400 text-xs mt-2 font-light leading-relaxed">Integrated course programs, structure displays, enrollment modules, and interactive galleries.</p>
+                </div>
+
+                <!-- Niche 2 -->
+                <div class="glass-panel p-6 rounded-xl border-white/5 hover:bg-white/[0.02] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300">
+                        <i class="fa-solid fa-hospital-user"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-heading mt-4">Hospitals & Health Clinics</h3>
+                    <p class="text-gray-400 text-xs mt-2 font-light leading-relaxed">Doctor directories, appointment booking setups, list of treatments, and dynamic patient inquiries.</p>
+                </div>
+
+                <!-- Niche 3 -->
+                <div class="glass-panel p-6 rounded-xl border-white/5 hover:bg-white/[0.02] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-heading mt-4">Local Shops & Retailers</h3>
+                    <p class="text-gray-400 text-xs mt-2 font-light leading-relaxed">Sleek digital catalogs, store product galleries, local business address maps, and WhatsApp call-to-actions.</p>
+                </div>
+
+                <!-- Niche 4 -->
+                <div class="glass-panel p-6 rounded-xl border-white/5 hover:bg-white/[0.02] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300">
+                        <i class="fa-solid fa-shop-lock"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-heading mt-4">Malls & Commercial Centers</h3>
+                    <p class="text-gray-400 text-xs mt-2 font-light leading-relaxed">Store directional maps, upcoming commercial events tracking, loyalty benefit displays, and timings.</p>
+                </div>
+
+                <!-- Niche 5 -->
+                <div class="glass-panel p-6 rounded-xl border-white/5 hover:bg-white/[0.02] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-heading mt-4">Hotels & Restaurants</h3>
+                    <p class="text-gray-400 text-xs mt-2 font-light leading-relaxed">Premium layout menus, visual structural room guides, instant reservations, and verified local user reviews.</p>
+                </div>
+
+                <!-- Niche 6 -->
+                <div class="glass-panel p-6 rounded-xl border-white/5 hover:bg-white/[0.02] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-slate-950 transition-all duration-300">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-heading mt-4">And Much More...</h3>
+                    <p class="text-gray-400 text-xs mt-2 font-light leading-relaxed">Whether you are a freelancer, real estate agent, gym owner or artist, we craft matching tailored structures.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CONTACT US PAGE ================= -->
+        <section id="contact" class="page space-y-12 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl mx-auto">
+                
+                <!-- Contact Info Section -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <h2 class="font-heading text-3xl font-bold tracking-tight text-white">Let’s Start <br>Your Project</h2>
+                        <p class="text-gray-400 font-light mt-2 text-sm">Fill out the encrypted Formspree network link panel below or communicate directly on our active handles.</p>
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+                        <!-- Email -->
+                        <div class="flex items-center gap-4 p-4 glass-panel rounded-xl border-white/5 hover:border-white/10 transition-colors">
+                            <div class="w-10 h-10 bg-brand-accent/10 border border-brand-accent/20 rounded-lg flex items-center justify-center text-brand-accentLight">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Official Email</h4>
+                                <a href="mailto:urcracko@gmail.com" class="text-white hover:underline mt-0.5 block font-medium">urcracko@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Instagram -->
+                        <div class="flex items-center gap-4 p-4 glass-panel rounded-xl border-white/5 hover:border-white/10 transition-colors">
+                            <div class="w-10 h-10 bg-pink-500/10 border border-pink-500/20 rounded-lg flex items-center justify-center text-pink-400">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Instagram Handles</h4>
+                                <a href="https://instagram.com/website_dev_tw" target="_blank" class="text-white hover:underline mt-0.5 block font-medium">@website_dev_tw</a>
+                            </div>
+                        </div>
+
+                        <!-- Facebook -->
+                        <div class="flex items-center gap-4 p-4 glass-panel rounded-xl border-white/5 hover:border-white/10 transition-colors">
+                            <div class="w-10 h-10 bg-blue-600/10 border border-blue-600/20 rounded-lg flex items-center justify-center text-blue-400">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Facebook Page</h4>
+                                <a href="https://facebook.com/website_dev_tw" target="_blank" class="text-white hover:underline mt-0.5 block font-medium">website_dev_tw</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fully Styled Formspree Component -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-8 border-white/5 shadow-2xl relative">
+                    <h3 class="text-xl font-bold font-heading text-white mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-sm text-brand-accentLight"></i> Transmit Project Request
+                    </h3>
+                    
+                    <!-- Integrated Your Verified Formspree Action Target Endpoint -->
+                    <form action="https://formspree.io/f/xeewvrkq" method="POST" class="space-y-5">
+                        
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider block">Your Email Address</label>
+                            <input type="email" name="email" required placeholder="john@example.com" class="w-full premium-input rounded-xl p-3.5 text-sm text-white focus:outline-none">
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider block">Your Message / Requirements</label>
+                            <textarea name="message" rows="5" required placeholder="Tell us about your school, hospital, shop layout setup configurations..." class="w-full premium-input rounded-xl p-3.5 text-sm text-white focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 text-center rounded-xl font-bold tracking-wide bg-gradient-to-r from-brand-accent to-brand-cyan hover:opacity-95 hover:scale-[1.01] active:scale-[0.99] text-white transition-all shadow-xl shadow-brand-accent/10">
+                            Send Secure Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Professional Corporate Footer -->
+    <footer class="mt-20 border-t border-white/5 bg-slate-950/50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-medium">
+            <p>&copy; 2026 Website Dev TW. All systems operational.</p>
+            <p class="tracking-wide">Designed & Deployed by <span class="text-gray-300">Ayyub Ansari</span> & <span class="text-gray-300">Umar Ansari</span></p>
+        </div>
+    </footer>
+
+    <!-- Optimized SPA Router System -->
+    <script>
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            const links = document.querySelectorAll('.nav-link');
+            
+            // First drop transition properties smoothly
+            pages.forEach(p => {
+                p.classList.remove('active-page');
+            });
+            links.forEach(l => l.classList.remove('active', 'text-white'));
+
+            // Set dynamic delay execution to allow structural transitions to blend beautifully
+            setTimeout(() => {
+                const activeTarget = document.getElementById(pageId);
+                if(activeTarget) {
+                    activeTarget.classList.add('active-page');
+                }
+                
+                const targetNav = document.getElementById('nav-' + pageId);
+                if(targetNav) {
+                    targetNav.classList.add('active', 'text-white');
+                }
+            }, 50);
+
+            // Smooth scroll viewport to global layout origin
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
